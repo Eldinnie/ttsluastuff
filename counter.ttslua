@@ -2,6 +2,7 @@ MIN_VALUE = -999
 MAX_VALUE = 999
 FONT_COLOR = {1,1,1,95}
 TOOLTIP_SHOW = true
+INJECTED_COUNTER = true
 
 function onload(saved_data)
     FONT_COLOR = {1,1,1,95}

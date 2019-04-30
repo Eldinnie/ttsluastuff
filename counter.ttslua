@@ -35,12 +35,12 @@ function createAll()
     end
     local scale = {x=1.5, y=1.5, z=1.5}
     local thickness = self.getBoundsNormalized().size.y
-    if self.tag == "Tile" then
+    if self.name == "Custom_Tile" then
         thickness = thickness*2
         scale = {0.75, 0.75, 0.75}
     end
     print(thickness)
-
+    print(self.name)
     self.createButton({
       label=tostring(CONFIG.VALUE),
       click_function="add_subtract",

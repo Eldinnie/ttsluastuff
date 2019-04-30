@@ -1,42 +1,35 @@
-MIN_VALUE = -999
-MAX_VALUE = 999
-FONT_COLOR = {1,1,1,95}
-COLOR_NAME = "White"
-TOOLTIP_SHOW = true
+CONFIG = {
+    MIN_VALUE = -99,
+    MAX_VALUE = 999,
+    FONT_COLOR = {1,1,1,95},
+    COLOR_NAME = "White",
+    TOOLTIP_SHOW = true,
+    VALUE = 0
+}
 INJECTED_COUNTER = true
 
 function onChat()
-    local tab = { NAME=self.getName(),
-    MIN_VALUE=MIN_VALUE, MAX_VALUE=MAX_VALUE,
-    FONT_COLOR=FONT_COLOR, COLOR_NAME=COLOR_NAME,
-    TOOLTIP_SHOW=TOOLTIP_SHOW, INJECTED_COUNTER=INJECTED_COUNTER
-    }
-    log(tab)
-end    
+    log(self.getName())
+    log(CONFIG)
+end
+
 
 function onload(saved_data)
-    TOOLTIP_SHOW = true
-    val = 0
-
     if saved_data ~= "" then
         local loaded_data = JSON.decode(saved_data)
-        FONT_COLOR = loaded_data[1]
-        val = loaded_data[2]
-        TOOLTIP_SHOW = loaded_data[3]
+        CONFIG = loaded_data
     end
-
     createAll()
 end
 
 function updateSave()
-    local data_to_save = {FONT_COLOR, val, TOOLTIP_SHOW}
-    saved_data = JSON.encode(data_to_save)
+    saved_data = JSON.encode(CONFIG)
     self.script_state = saved_data
 end
 
 function createAll()
     if TOOLTIP_SHOW then
-        ttText = self.getName().. ": " .. val
+        ttText = self.getName().. ": " .. CONFIG.VALUE
     else
         ttText = self.getName()
     end
@@ -44,7 +37,7 @@ function createAll()
     thickness = self.getBoundsNormalized().size.y
 
     self.createButton({
-      label=tostring(val),
+      label=tostring(CONFIG.VALUE),
       click_function="add_subtract",
       tooltip=ttText,
       function_owner=self,
@@ -54,7 +47,7 @@ function createAll()
       alignment = 3,
       scale={x=1.5, y=1.5, z=1.5},
       font_size=600,
-      font_color=FONT_COLOR,
+      font_color=CONFIG.FONT_COLOR,
       color={0,0,0,0}
       })
 
@@ -70,7 +63,7 @@ function createAll()
         height = 1000,
         font_size = 200,
         scale={x=1, y=1, z=1},
-        font_color= FONT_COLOR,
+        font_color= CONFIG.FONT_COLOR,
         color = {0,0,0,0}
         })
 
@@ -84,9 +77,9 @@ end
 
 function add_subtract(_obj, _color, alt_click)
     mod = alt_click and -1 or 1
-    new_value = math.min(math.max(val + mod, MIN_VALUE), MAX_VALUE)
-    if val ~= new_value then
-        val = new_value
+    new_value = math.min(math.max(CONFIG.VALUE + mod, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)
+    if CONFIG.VALUE ~= new_value then
+        CONFIG.VALUE = new_value
         updateVal()
         updateSave()
     end
@@ -94,21 +87,21 @@ end
 
 function updateVal()
     if TOOLTIP_SHOW then
-        ttText = self.getName().. ": " .. val
+        ttText = self.getName().. ": " .. CONFIG.VALUE
     else
         ttText = self.getName()
     end
 
     self.editButton({
         index = 0,
-        label = tostring(val),
+        label = tostring(CONFIG.VALUE),
         tooltip = ttText
         })
 end
 
 function setTooltips()
     if TOOLTIP_SHOW then
-        ttText = self.getName().. ": " .. val
+        ttText = self.getName().. ": " .. CONFIG.VALUE
     else
         ttText = self.getName()
     end
@@ -120,7 +113,7 @@ function setTooltips()
         })
     self.editButton({
         index = 0,
-        value = tostring(val),
+        value = tostring(CONFIG.VALUE),
         tooltip = ttText
         })
 end

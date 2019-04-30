@@ -28,7 +28,7 @@ function updateSave()
 end
 
 function createAll()
-    if TOOLTIP_SHOW then
+    if CONFIG.TOOLTIP_SHOW then
         ttText = self.getName().. ": " .. CONFIG.VALUE
     else
         ttText = self.getName()
@@ -86,7 +86,7 @@ function add_subtract(_obj, _color, alt_click)
 end
 
 function updateVal()
-    if TOOLTIP_SHOW then
+    if CONFIG.TOOLTIP_SHOW then
         ttText = self.getName().. ": " .. CONFIG.VALUE
     else
         ttText = self.getName()
@@ -100,7 +100,7 @@ function updateVal()
 end
 
 function setTooltips()
-    if TOOLTIP_SHOW then
+    if CONFIG.TOOLTIP_SHOW then
         ttText = self.getName().. ": " .. CONFIG.VALUE
     else
         ttText = self.getName()

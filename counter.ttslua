@@ -1,7 +1,7 @@
 CONFIG = {
     MIN_VALUE = -99,
     MAX_VALUE = 999,
-    FONT_COLOR = {1,1,1,95},
+    FONT_COLOR = {0,0,0,95},
     COLOR_NAME = "White",
     TOOLTIP_SHOW = true,
     VALUE = 0
@@ -33,8 +33,13 @@ function createAll()
     else
         ttText = self.getName()
     end
-
-    thickness = self.getBoundsNormalized().size.y
+    local scale = {x=1.5, y=1.5, z=1.5}
+    local thickness = self.getBoundsNormalized().size.y
+    if self.tag == "Tile" then
+        thickness = thickness*2
+        scale = {0.75, 0.75, 0.75}
+    end
+    print(thickness)
 
     self.createButton({
       label=tostring(CONFIG.VALUE),
@@ -45,7 +50,7 @@ function createAll()
       height=600,
       width=1000,
       alignment = 3,
-      scale={x=1.5, y=1.5, z=1.5},
+      scale=scale,
       font_size=600,
       font_color=CONFIG.FONT_COLOR,
       color={0,0,0,0}
@@ -86,17 +91,11 @@ function add_subtract(_obj, _color, alt_click)
 end
 
 function updateVal()
-    if CONFIG.TOOLTIP_SHOW then
-        ttText = self.getName().. ": " .. CONFIG.VALUE
-    else
-        ttText = self.getName()
-    end
-
     self.editButton({
         index = 0,
-        label = tostring(CONFIG.VALUE),
-        tooltip = ttText
+        label = tostring(CONFIG.VALUE)
         })
+    setTooltips()
 end
 
 function setTooltips()

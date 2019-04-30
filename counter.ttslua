@@ -39,8 +39,6 @@ function createAll()
         thickness = thickness*2
         scale = {0.75, 0.75, 0.75}
     end
-    print(thickness)
-    print(self.name)
     self.createButton({
       label=tostring(CONFIG.VALUE),
       click_function="add_subtract",

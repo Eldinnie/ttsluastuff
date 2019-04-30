@@ -55,7 +55,7 @@ function createAll()
         value = self.getName(),
         input_function = "editName",
         tooltip=ttText,
-        label = "Counter",
+        label = "",
         function_owner = self,
         alignment = 3,
         position = {0,thickness/2,1.7},

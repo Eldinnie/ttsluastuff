@@ -33,9 +33,9 @@ function onload(saved_data)
 end
 
 function onNumberTyped(player_color, number_typed)
-    new_value = math.min(math.max(number_typed, MIN_VALUE), MAX_VALUE)
-    if val ~= new_value then
-        val = new_value
+    new_value = math.min(math.max(number_typed, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)
+    if CONFIG.VALUE ~= new_value then
+        CONFIG.VALUE = new_value
         updateVal()
         updateSave()
     end

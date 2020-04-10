@@ -18,15 +18,15 @@ function onload(saved_data)
         local loaded_data = JSON.decode(saved_data)
         CONFIG = loaded_data
     end
-    if CONFIG.CONTEXT_FIVE = true then
+    if CONFIG.CONTEXT_FIVE then
         self.addContextMenuItem("+5", add_5, true)
         self.addContextMenuItem("-5", sub_5, true)
     end
-    if CONFIG.CONTEXT_TEN = true then
+    if CONFIG.CONTEXT_TEN then
         self.addContextMenuItem("+10", add_10, true)
         self.addContextMenuItem("-10", sub_10, true)
     end
-    if CONFIG.NUMBER_TYPED = true then
+    if CONFIG.NUMBER_TYPED then
         self.max_typed_number = MAX_VALUE
     end
     createAll()

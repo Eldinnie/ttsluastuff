@@ -8,7 +8,7 @@ CONFIG = {
     VALUE = 0,
     CONTEXT_FIVE = true,
     CONTEXT_TEN = true,
-    NUMBER_TYPED = true
+    NUMBER_TYPED = true,
 }
 INJECTED_COUNTER = true
 
@@ -27,7 +27,7 @@ function onload(saved_data)
         self.addContextMenuItem("-10", sub_10, true)
     end
     if CONFIG.NUMBER_TYPED then
-        self.max_typed_number = MAX_VALUE
+        self.max_typed_number = CONFIG.MAX_VALUE
     end
     createAll()
 end

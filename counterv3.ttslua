@@ -5,7 +5,10 @@ CONFIG = {
     FONT_SIZE = 600,
     COLOR_HEX = "#000000",
     TOOLTIP_SHOW = true,
-    VALUE = 0
+    VALUE = 0,
+    CONTEXT_FIVE = true,
+    CONTEXT_TEN = true,
+    NUMBER_TYPED = true
 }
 INJECTED_COUNTER = true
 
@@ -15,18 +18,24 @@ function onload(saved_data)
         local loaded_data = JSON.decode(saved_data)
         CONFIG = loaded_data
     end
-    self.addContextMenuItem("+10", add_10, true)
-    self.addContextMenuItem("+5", add_5, true)
-    self.addContextMenuItem("-5", sub_5, true)
-    self.addContextMenuItem("-10", sub_10, true)
-    self.max_typed_number = CONFIG.MAX_VALUE
+    if CONFIG.CONTEXT_FIVE = true then
+        self.addContextMenuItem("+5", add_5, true)
+        self.addContextMenuItem("-5", sub_5, true)
+    end
+    if CONFIG.CONTEXT_TEN = true then
+        self.addContextMenuItem("+10", add_10, true)
+        self.addContextMenuItem("-10", sub_10, true)
+    end
+    if CONFIG.NUMBER_TYPED = true then
+        self.max_typed_number = MAX_VALUE
+    end
     createAll()
 end
 
 function onNumberTyped(player_color, number_typed)
-    new_value = math.min(math.max(number_typed, CONFIG.MIN_VALUE), CONFIG.MAX_VALUE)
-    if CONFIG.VALUE ~= new_value then
-        CONFIG.VALUE = new_value
+    new_value = math.min(math.max(number_typed, MIN_VALUE), MAX_VALUE)
+    if val ~= new_value then
+        val = new_value
         updateVal()
         updateSave()
     end

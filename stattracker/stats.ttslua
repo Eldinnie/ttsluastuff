@@ -3,13 +3,22 @@ STAT_URL = ""
 ID = false
 DEBUG = false
 
-function loadStats(save_state, stat_url, initial_wait, interval, debug)
-    STAT_URL = stat_url
+
+function start_tracker(vals)
+  if vals then
+    initial_wait = vals[1]
+    interval = vals[2]
+    debug = vals[3]
+  end
+  loadStats(initial_wait, interval, debug)
+end
+
+function loadStats(initial_wait, interval, debug)
     local initial_wait = initial_wait or 600
     local interval = interval or 120
     if debug then DEBUG=debug end
 
-    local state = JSON.decode(save_state)
+    local state = JSON.decode(self.script_state)
     if state and state ~= "" then
         if DEBUG then log("Found save state") end
         if state.ID then
